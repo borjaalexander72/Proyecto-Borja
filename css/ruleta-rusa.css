@@ -1,0 +1,248 @@
+.ruleta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ruleta-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+}
+
+.ruleta-controls {
+    border-right: 2px solid #eee;
+    padding-right: 2rem;
+}
+
+.fancy-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.fancy-input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+    outline: none;
+}
+
+.fancy-button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.fancy-button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+}
+
+.participants-list {
+    margin-top: 2rem;
+}
+
+.participants-list h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+#ruleta-list {
+    list-style: none;
+    padding: 0;
+}
+
+#ruleta-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+#ruleta-list li:hover {
+    background: #e9ecef;
+}
+
+#ruleta-list.many-items li {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+.wheel-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    box-shadow: 0 0 50px rgba(0,0,0,0.2);
+}
+
+.wheel text {
+    font-size: calc(12px + (20 - 12) * (100 - var(--participant-count) * 3) / 100);
+    font-weight: bold;
+    fill: #fff;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: #ff4757;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 2;
+}
+
+.spin-button {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    display: block;
+    margin: 2rem auto 0;
+}
+
+.spin-button:hover {
+    background: #ff6b81;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(255,71,87,0.3);
+}
+
+.ruleta-result {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-animation {
+    animation: celebrate 0.5s ease-in-out;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.group-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.select-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.select-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: 500;
+}
+
+.fancy-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    background-color: #fff;
+}
+
+.fancy-select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+    outline: none;
+}
+
+#load-students {
+    align-self: flex-end;
+}
+
+.control-panel {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.manual-input, .load-students-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.manual-input h3, .load-students-panel h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}

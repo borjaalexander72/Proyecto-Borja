@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard Docente</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Docente</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a href="mis-cursos.html"><i class="fas fa-book"></i> Mis Cursos</a></li>
+                <li><a href="asistencia.html"><i class="fas fa-calendar-check"></i> Asistencia</a></li>
+                <li><a href="registro-notas.html"><i class="fas fa-clipboard-list"></i> Registro de Notas</a></li>
+                <li><a href="ruleta-rusa.html"><i class="fas fa-random"></i> Ruleta Rusa</a></li>
+                <li><a href="orden-unidad-ia.html"><i class="fas fa-robot"></i> Orden de Unidad IA</a></li>
+                <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <header>
+                <h1><i class="fas fa-home"></i> Bienvenido al Proyecto Borja</h1>
+                <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </header>
+            <main>
+                <div class="dashboard-buttons">
+                    <a href="estudiantes.html" class="dashboard-btn"><i class="fas fa-user-graduate"></i> Estudiantes</a>
+                    <a href="mis-cursos.html" class="dashboard-btn"><i class="fas fa-book"></i> Mis Cursos</a>
+                    <a href="asistencia.html" class="dashboard-btn"><i class="fas fa-calendar-check"></i> Asistencia</a>
+                    <a href="ruleta-rusa.html" class="dashboard-btn"><i class="fas fa-random"></i> Ruleta Rusa</a>
+                </div>
+                <div class="stats-container">
+                    <div class="stats-header">
+                        <h2><i class="fas fa-chart-bar"></i> Estadísticas de Rendimiento Académico</h2>
+                        <div class="stats-filters">
+                            <select id="statsGradeFilter">
+                                <option value="">Todos los Grados</option>
+                                <!-- Se llenará dinámicamente -->
+                            </select>
+                            <select id="statsSectionFilter">
+                                <option value="">Todas las Secciones</option>
+                                <!-- Se llenará dinámicamente -->
+                            </select>
+                            <button id="refreshStats" class="btn-primary btn-sm">
+                                <i class="fas fa-sync-alt"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                            <div class="stat-value" id="totalStudentsValue">0</div>
+                            <div class="stat-label">Estudiantes Totales</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-award"></i></div>
+                            <div class="stat-value" id="goodPerformanceValue">0%</div>
+                            <div class="stat-label">Buen Rendimiento</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="stat-value" id="averagePerformanceValue">0%</div>
+                            <div class="stat-label">Rendimiento Regular</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                            <div class="stat-value" id="lowPerformanceValue">0%</div>
+                            <div class="stat-label">Bajo Rendimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    
+                    <div class="line-chart-container">
+                        <h3><i class="fas fa-chart-line"></i> Distribución de Notas</h3>
+                        <canvas id="notesDistributionChart"></canvas>
+                    </div>
+                    
+                    <div class="stats-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> Información de Rendimiento</h3>
+                            <ul>
+                                <li><span class="badge success"></span> <strong>Buen Rendimiento:</strong> Estudiantes con promedio ≥ 15</li>
+                                <li><span class="badge warning"></span> <strong>Rendimiento Regular:</strong> Estudiantes con promedio entre 11 y 14</li>
+                                <li><span class="badge danger"></span> <strong>Bajo Rendimiento:</strong> Estudiantes con promedio < 11</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-user-circle"></i> Complete su Perfil</h2>
+            <p>Para una mejor experiencia, complete sus datos personales:</p>
+            
+            <form id="profileForm">
+                <div class="input-group">
+                    <label for="fullName">Apellidos y Nombres</label>
+                    <input type="text" id="fullName" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" maxlength="8" pattern="[0-9]{8}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="specialty">Especialidad</label>
+                    <select id="specialty" required>
+                        <option value="">Seleccione su especialidad</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Comunicación">Comunicación</option>
+                        <option value="Ciencias Sociales">Ciencias Sociales</option>
+                        <option value="Ciencia y Tecnología">Ciencia y Tecnología</option>
+                        <option value="Desarrollo Personal">Desarrollo Personal</option>
+                        <option value="Arte">Arte</option>
+                        <option value="Educación Física">Educación Física</option>
+                        <option value="Educación Religiosa">Educación Religiosa</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Computación">Computación</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+  // Verificar que localStorage tenga datos
+  document.addEventListener("DOMContentLoaded", function() {
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    console.log("Estudiantes cargados:", students.length);
+    
+    if (students.length > 0) {
+      console.log("Ejemplo de estudiante:", students[0]);
+    }
+  });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard-stats.js"></script>
+    <script src="js/dashboard-stats.js"></script>
+</body>
+</html>
+

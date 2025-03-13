@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Ruleta Rusa</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/ruleta-rusa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Docente</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a href="mis-cursos.html"><i class="fas fa-book"></i> Mis Cursos</a></li>
+                <li><a href="asistencia.html"><i class="fas fa-calendar-check"></i> Asistencia</a></li>
+                <li><a href="registro-notas.html"><i class="fas fa-clipboard-list"></i> Registro de Notas</a></li>
+                <li><a href="ruleta-rusa.html" class="active"><i class="fas fa-random"></i> Ruleta Rusa</a></li>
+                <li><a href="orden-unidad-ia.html"><i class="fas fa-robot"></i> Orden de Unidad IA</a></li>
+                <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <header>
+                <h1><i class="fas fa-random"></i> Ruleta Rusa</h1>
+                <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </header>
+            <main>
+                <div class="ruleta-wrapper">
+                    <div class="ruleta-container">
+                        <div class="ruleta-controls">
+                            <div class="control-panel">
+                                <!-- Panel de entrada manual -->
+                                <div class="manual-input">
+                                    <h3><i class="fas fa-keyboard"></i> Agregar Manualmente</h3>
+                                    <div class="input-group">
+                                        <input type="text" id="ruleta-input" placeholder="Nombre del participante" class="fancy-input">
+                                        <button id="add-btn" class="fancy-button">
+                                            <i class="fas fa-plus"></i> Agregar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Panel de carga de estudiantes -->
+                                <div class="load-students-panel">
+                                    <h3><i class="fas fa-users"></i> Cargar Grupo de Estudiantes</h3>
+                                    <div class="group-selection">
+                                        <div class="select-group">
+                                            <div class="select-container">
+                                                <label for="gradeSelect">Grado:</label>
+                                                <select id="gradeSelect" class="fancy-select">
+                                                    <option value="">Seleccione grado</option>
+                                                </select>
+                                            </div>
+                                            <div class="select-container">
+                                                <label for="sectionSelect">Sección:</label>
+                                                <select id="sectionSelect" class="fancy-select">
+                                                    <option value="">Seleccione sección</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button id="load-students" class="fancy-button">
+                                            <i class="fas fa-sync-alt"></i> Cargar Estudiantes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lista de participantes -->
+                            <div class="participants-list">
+                                <h3><i class="fas fa-list"></i> Participantes</h3>
+                                <ul id="ruleta-list"></ul>
+                            </div>
+                        </div>
+                        
+                        <div class="ruleta-game">
+                            <div class="wheel-container">
+                                <div class="wheel-pointer"></div>
+                                <div class="wheel" id="ruleta-wheel">
+                                    <canvas id="wheelCanvas"></canvas>
+                                </div>
+                            </div>
+                            <button id="spin-btn" class="spin-button">
+                                <i class="fas fa-sync-alt"></i> ¡Girar!
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="ruleta-result" class="ruleta-result">
+                        <div class="result-content"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/ruleta-rusa.js"></script>
+</body>
+</html>
+

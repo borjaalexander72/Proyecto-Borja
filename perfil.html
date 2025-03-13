@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Docente</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Docente</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a href="mis-cursos.html"><i class="fas fa-book"></i> Mis Cursos</a></li>
+                <li><a href="asistencia.html"><i class="fas fa-calendar-check"></i> Asistencia</a></li>
+                <li><a href="registro-notas.html"><i class="fas fa-clipboard-list"></i> Registro de Notas</a></li>
+                <li><a href="ruleta-rusa.html"><i class="fas fa-random"></i> Ruleta Rusa</a></li>
+                <li><a href="orden-unidad-ia.html"><i class="fas fa-robot"></i> Orden de Unidad IA</a></li>
+                <li><a href="perfil.html" class="active"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <header>
+                <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+                <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </header>
+            <main class="profile-content">
+
+                <div class="profile-grid">
+                    <!-- Información Personal -->
+                    <div class="profile-card">
+                        <h2><i class="fas fa-user"></i> Información Personal</h2>
+                        <div class="profile-info">
+                            <div class="info-group">
+                                <label>Apellidos y Nombres</label>
+                                <p id="teacherName" class="editable">No especificado</p>
+                            </div>
+                            <div class="info-group">
+                                <label>DNI</label>
+                                <p id="teacherDNI" class="editable">No especificado</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Académica -->
+                    <div class="profile-card">
+                        <h2><i class="fas fa-graduation-cap"></i> Información Académica</h2>
+                        <div class="profile-info">
+                            <div class="info-group">
+                                <label>Grado Académico</label>
+                                <p id="academicDegree">Docente</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Especialidad</label>
+                                <p id="specialty">Cargando...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas del Docente -->
+                    <div class="profile-card">
+                        <h2><i class="fas fa-chart-pie"></i> Estadísticas</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-value" id="totalCourses">6</span>
+                                <span class="stat-label">Cursos Activos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="totalStudents">180</span>
+                                <span class="stat-label">Estudiantes</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="averageScore">15.8</span>
+                                <span class="stat-label">Promedio General</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificaciones -->
+                    <div class="profile-card">
+                        <h2><i class="fas fa-certificate"></i> Certificaciones</h2>
+                        <div class="certificates-list">
+                            <!-- Se llenarán dinámicamente -->
+                        </div>
+                        <button class="btn-add-certificate">
+                            <i class="fas fa-plus"></i> Agregar Certificación
+                        </button>
+                    </div>
+
+                    <!-- Horario de Atención -->
+                    <div class="profile-card">
+                        <h2><i class="fas fa-clock"></i> Horario de Atención</h2>
+                        <div class="schedule-grid">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/perfil.js"></script>
+</body>
+</html>

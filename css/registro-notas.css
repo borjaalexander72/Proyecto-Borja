@@ -1,0 +1,212 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: #f4f4f9;
+}
+
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #ff6b6b;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+    background: #444;
+    padding-left: 10px;
+    transition: 0.3s;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 270px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.logout-btn {
+    background: #ff6b6b;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #f06595;
+}
+
+main {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.export-buttons {
+    margin-bottom: 20px;
+}
+
+.export-buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background: #22b8cf;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.export-buttons button:hover {
+    background: #20a7b8;
+}
+
+.grades-table h2 {
+    margin-bottom: 10px;
+}
+
+.grades-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grades-table th, .grades-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.grades-table th {
+    background: #f4f4f9;
+}
+
+.grades-table td {
+    background: #fff;
+}
+
+/* Estilos para los selectores */
+#gradeFilter, #sectionFilter {
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    min-width: 150px; /* Ancho mínimo para los selectores */
+}
+
+/* Estilos para el contenedor del buscador */
+.search-grades-form {
+    margin-bottom: 20px; /* Espaciado inferior */
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Centrar verticalmente */
+    gap: 10px; /* Espaciado entre los elementos */
+}
+
+/* Estilos para el campo de búsqueda */
+#searchInput {
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    flex: 1; /* Hacer que el campo de búsqueda ocupe el espacio disponible */
+    min-width: 200px; /* Ancho mínimo para el campo de búsqueda */
+}
+
+/* Estilos para el botón de búsqueda */
+.search-button {
+    background-color: #4CAF50; /* Color de fondo verde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.search-button:hover {
+    background-color: #45a049; /* Color de fondo más oscuro al pasar el mouse */
+}

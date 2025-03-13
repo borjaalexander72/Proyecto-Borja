@@ -1,0 +1,93 @@
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f9; /* O background: linear-gradient(...) si quieres el mismo gradiente que el login */
+}
+
+.success-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.success-box h1 {
+    color: #ff6b6b;
+    font-size: 3em;
+    margin-bottom: 20px;
+    animation: shake 0.5s;
+}
+
+.success-box p {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    animation: slideInLeft 1s ease-in-out;
+}
+
+#continue-btn {
+    background: #22b8cf;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+    animation: zoomIn 1s ease-in-out;
+}
+
+#continue-btn:hover {
+    background: #20a7b8;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(-10px); }
+    20% { transform: translateX(10px); }
+    30% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    50% { transform: translateX(-10px); }
+    60% { transform: translateX(10px); }
+    70% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    90% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

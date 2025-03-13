@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Registro de Notas</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/registro-notas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Docente</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a href="mis-cursos.html"><i class="fas fa-book"></i> Mis Cursos</a></li>
+                <li><a href="asistencia.html"><i class="fas fa-calendar-check"></i> Asistencia</a></li>
+                <li><a href="registro-notas.html" class="active"><i class="fas fa-clipboard-list"></i> Registro de Notas</a></li>
+                <li><a href="ruleta-rusa.html"><i class="fas fa-random"></i> Ruleta Rusa</a></li>
+                <li><a href="orden-unidad-ia.html"><i class="fas fa-robot"></i> Orden de Unidad IA</a></li>
+                <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <header>
+                <h1><i class="fas fa-clipboard-list"></i> Registro de Notas</h1>
+                <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </header>
+            <main>
+                <div class="search-grades-form">
+                    <h2>Buscar Estudiante</h2>
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre o DNI" autocomplete="off">
+                    <select id="gradeFilter">
+                        <option value="">Todos los Grados</option>
+                        <!-- Aquí puedes agregar opciones dinámicamente o manualmente -->
+                    </select>
+                    <select id="sectionFilter">
+                        <option value="">Todas las Secciones</option>
+                        <!-- Aquí puedes agregar opciones dinámicamente o manualmente -->
+                    </select>
+                    <button class="search-button">Buscar</button>
+                </div>
+                <div class="export-buttons">
+                    <button id="exportExcel">Exportar a Excel</button>
+                    <button id="exportPDF">Exportar a PDF</button>
+                </div>
+                <div class="grades-table">
+                    <h2>Notas de Estudiantes</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Apellidos</th>
+                                <th>Nombres</th>
+                                <th>DNI</th>
+                                <th>Grado</th>
+                                <th>Sección</th>
+                                <th>Nota 1</th>
+                                <th>Letra 1</th>
+                                <th>Nota 2</th>
+                                <th>Letra 2</th>
+                                <th>Nota 3</th>
+                                <th>Letra 3</th>
+                                <th>Promedio Numérico</th>
+                                <th>Promedio en Letras</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gradesTableBody">
+                            <!-- Las notas de los estudiantes se agregarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/registro-notas.js"></script>
+    <script>
+        // Ejemplo de estructura de datos en localStorage para las notas
+        const studentGrades = [
+            {
+                studentId: "1",
+                grade: "15",
+                date: "2024-03-11"
+            },
+            {
+                studentId: "1",
+                grade: "16",
+                date: "2024-03-11"
+            }
+            // ... más notas
+        ];
+
+        localStorage.setItem('studentGrades', JSON.stringify(studentGrades));
+    </script>
+</body>
+</html>
+

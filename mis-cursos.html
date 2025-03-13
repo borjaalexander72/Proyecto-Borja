@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+  <title>Mis Cursos - Dashboard Docente</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/mis-cursos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+      <nav class="sidebar">
+          <div class="sidebar-header">
+              <h2>Docente</h2>
+          </div>
+          <ul>
+              <li><a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+              <li><a href="mis-cursos.html" class="active"><i class="fas fa-book"></i> Mis Cursos</a></li>
+              <li><a href="asistencia.html"><i class="fas fa-calendar-check"></i> Asistencia</a></li>
+              <li><a href="registro-notas.html"><i class="fas fa-clipboard-list"></i> Registro de Notas</a></li>
+              <li><a href="ruleta-rusa.html"><i class="fas fa-random"></i> Ruleta Rusa</a></li>
+              <li><a href="orden-unidad-ia.html"><i class="fas fa-robot"></i> Orden de Unidad IA</a></li>
+              <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+              <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+          </ul>
+      </nav>
+      <div class="content">
+          <header>
+              <h1><i class="fas fa-book"></i> Mis Cursos</h1>
+              <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+          </header>
+          <main>
+              <div class="courses-controls">
+                  <button id="new-course-btn" class="btn-primary">
+                      <i class="fas fa-plus"></i> Nuevo Curso
+                  </button>
+                  <div class="search-box">
+                      <input type="text" id="course-search" placeholder="Buscar curso...">
+                      <i class="fas fa-search"></i>
+                  </div>
+              </div>
+
+              <div class="courses-grid" id="courses-container">
+                  <!-- Los cursos se cargarán dinámicamente aquí -->
+              </div>
+          </main>
+      </div>
+  </div>
+
+  <!-- Modal para Nuevo/Editar Curso -->
+  <div id="course-modal" class="modal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2><i class="fas fa-book"></i> <span id="modal-title">Nuevo Curso</span></h2>
+              <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="course-name">
+                      <i class="fas fa-heading"></i> Nombre del Curso
+                  </label>
+                  <input type="text" id="course-name" class="form-control" required>
+              </div>
+
+              <div class="form-grid">
+                  <div class="form-group">
+                      <label for="course-code">
+                          <i class="fas fa-hashtag"></i> Código
+                      </label>
+                      <input type="text" id="course-code" class="form-control" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="course-semester">
+                          <i class="fas fa-calendar-alt"></i> Semestre
+                      </label>
+                      <select id="course-semester" class="form-control" required>
+                          <option value="2024-1">2024-1</option>
+                          <option value="2024-2">2024-2</option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="course-description">
+                      <i class="fas fa-align-left"></i> Descripción
+                  </label>
+                  <textarea id="course-description" class="form-control" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="course-color">
+                      <i class="fas fa-palette"></i> Color del Curso
+                  </label>
+                  <div class="color-selector">
+                      <div class="color-option" data-color="1" style="background: linear-gradient(135deg, #4361ee, #3a56d4);"></div>
+                      <div class="color-option" data-color="2" style="background: linear-gradient(135deg, #4cc9f0, #3db8df);"></div>
+                      <div class="color-option" data-color="3" style="background: linear-gradient(135deg, #4ade80, #22c55e);"></div>
+                      <div class="color-option" data-color="4" style="background: linear-gradient(135deg, #f72585, #e91e63);"></div>
+                      <div class="color-option" data-color="5" style="background: linear-gradient(135deg, #fb8500, #fd9e2b);"></div>
+                      <div class="color-option" data-color="6" style="background: linear-gradient(135deg, #7209b7, #9d4edd);"></div>
+                  </div>
+                  <input type="hidden" id="course-color" value="1">
+              </div>
+
+              <div class="form-group">
+                  <label>
+                      <i class="fas fa-cog"></i> Configuración del Curso
+                  </label>
+                  <div class="checkbox-grid">
+                      <label class="checkbox-container">
+                          <input type="checkbox" id="enable-forums">
+                          <span class="checkmark"></span>
+                          Habilitar Foros
+                      </label>
+                      <label class="checkbox-container">
+                          <input type="checkbox" id="enable-assignments">
+                          <span class="checkmark"></span>
+                          Habilitar Tareas
+                      </label>
+                      <label class="checkbox-container">
+                          <input type="checkbox" id="enable-attendance">
+                          <span class="checkmark"></span>
+                          Control de Asistencia
+                      </label>
+                      <label class="checkbox-container">
+                          <input type="checkbox" id="enable-resources">
+                          <span class="checkmark"></span>
+                          Recursos Digitales
+                      </label>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button id="save-course" class="btn-primary">
+                  <i class="fas fa-save"></i> Guardar Curso
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal para Ver Curso y Gestionar Sesiones -->
+  <div id="view-course-modal" class="modal">
+      <div class="modal-content modal-large">
+          <div class="modal-header">
+              <h2><i class="fas fa-book"></i> <span id="view-course-title"></span></h2>
+              <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="course-info">
+                  <p><strong><i class="fas fa-hashtag"></i> Código:</strong> <span id="view-course-code"></span></p>
+                  <p><strong><i class="fas fa-calendar-alt"></i> Semestre:</strong> <span id="view-course-semester"></span></p>
+                  <p><strong><i class="fas fa-align-left"></i> Descripción:</strong> <span id="view-course-description"></span></p>
+              </div>
+
+              <div class="sessions-section">
+                  <div class="sessions-header">
+                      <h3><i class="fas fa-clock"></i> Sesiones</h3>
+                      <button id="add-session-btn" class="btn-primary">
+                          <i class="fas fa-plus"></i> Nueva Sesión
+                      </button>
+                  </div>
+                  <div id="sessions-list" class="sessions-list">
+                      <!-- Las sesiones se cargarán dinámicamente aquí -->
+                      <div class="session-card">
+                          <div class="session-header">
+                              <div class="session-info">
+                                  <h4 class="session-title">SESIÓN <span>1</span></h4>
+                                  <h5 class="session-subtitle">Título de la sesión</h5>
+                                  <div class="session-date">
+                                      <i class="fas fa-calendar"></i> Fecha de la sesión
+                                  </div>
+                              </div>
+                              
+                              <div class="session-actions">
+                                  <button class="btn-grades">
+                                      <i class="fas fa-chart-bar"></i> Gestionar Notas
+                                  </button>
+                                  <button class="btn-edit">
+                                      <i class="fas fa-edit"></i> Editar
+                                  </button>
+                                  <button class="btn-delete">
+                                      <i class="fas fa-trash"></i>
+                                  </button>
+                              </div>
+                          </div>
+                          
+                          <div class="session-description">
+                              Descripción de la sesión...
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal para Nueva Sesión -->
+  <div id="session-modal" class="modal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2><i class="fas fa-clock"></i> Nueva Sesión</h2>
+              <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="session-title">
+                      <i class="fas fa-heading"></i> Título de la Sesión
+                  </label>
+                  <input type="text" id="session-title" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                  <label for="session-number">
+                      <i class="fas fa-hashtag"></i> Número de Sesión
+                  </label>
+                  <input type="number" id="session-number" class="form-control" min="1" required>
+              </div>
+
+              <div class="form-grid">
+                  <div class="form-group">
+                      <label for="session-date">
+                          <i class="fas fa-calendar"></i> Fecha
+                      </label>
+                      <input type="date" id="session-date" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="session-duration">
+                          <i class="fas fa-hourglass"></i> Duración (horas)
+                      </label>
+                      <input type="number" id="session-duration" class="form-control" min="1" max="8" required>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="session-description">
+                      <i class="fas fa-align-left"></i> Descripción
+                  </label>
+                  <textarea id="session-description" class="form-control" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                  <label>
+                      <i class="fas fa-tasks"></i> Actividades y Evaluación
+                  </label>
+                  <div id="activities-container">
+                      <!-- Las actividades se agregarán dinámicamente -->
+                  </div>
+                  <button id="add-activity-btn" class="btn-secondary">
+                      <i class="fas fa-plus"></i> Agregar Actividad
+                  </button>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button id="save-session" class="btn-primary">
+                  <i class="fas fa-save"></i> Guardar Sesión
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal para Gestionar Notas de Sesión -->
+  <div id="session-grades-modal" class="modal">
+      <div class="modal-content modal-large">
+          <div class="modal-header">
+              <h2><i class="fas fa-clipboard-list"></i> <span id="session-grades-title">Notas de Sesión</span></h2>
+              <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="session-info">
+                  <p><strong><i class="fas fa-book"></i> Curso:</strong> <span id="session-grades-course"></span></p>
+                  <p><strong><i class="fas fa-clock"></i> Sesión:</strong> <span id="session-grades-session"></span></p>
+                  <p><strong><i class="fas fa-calendar"></i> Fecha:</strong> <span id="session-grades-date"></span></p>
+              </div>
+              
+              <div class="grades-filters">
+                  <div class="form-group">
+                      <label for="grades-grade-filter">
+                          <i class="fas fa-filter"></i> Filtrar por Grado
+                      </label>
+                      <select id="grades-grade-filter" class="form-control">
+                          <option value="">Todos los Grados</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="grades-section-filter">
+                          <i class="fas fa-filter"></i> Filtrar por Sección
+                      </label>
+                      <select id="grades-section-filter" class="form-control">
+                          <option value="">Todas las Secciones</option>
+                      </select>
+                  </div>
+              </div>
+              
+              <div class="grades-table-container">
+                  <table class="grades-table">
+                      <thead>
+                          <tr>
+                              <th>Apellidos</th>
+                              <th>Nombres</th>
+                              <th>Grado</th>
+                              <th>Sección</th>
+                              <th>Nota</th>
+                              <th>Observaciones</th>
+                          </tr>
+                      </thead>
+                      <tbody id="session-grades-body">
+                          <!-- Las filas de estudiantes se agregarán dinámicamente -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button id="save-session-grades" class="btn-primary">
+                  <i class="fas fa-save"></i> Guardar Notas
+              </button>
+              <button id="export-session-grades" class="btn-secondary">
+                  <i class="fas fa-file-export"></i> Exportar
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script src="js/mis-cursos.js"></script>
+  <script>
+    // Agregar en mis-cursos.js y estudiantes.js donde se guarden cambios
+    function updateData() {
+        // ...código existente de guardado...
+        
+        // Disparar evento de actualización
+        window.dispatchEvent(new Event('coursesUpdated')); // o 'studentsUpdated'
+    }
+  </script>
+</body>
+</html>
+
